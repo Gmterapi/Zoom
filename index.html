@@ -23,7 +23,7 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-        body { background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; padding: 1rem; overflow-x: hidden; padding-bottom: 100px; }
+        body { background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; padding: 1rem; overflow-x: hidden; }
 
         header { text-align: center; margin-bottom: 2rem; max-width: 1200px; margin: 0 auto 2rem; padding: 0 1rem; }
         .brand { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
@@ -32,25 +32,6 @@
         
         .btn-add { background: var(--primary); color: white; border: none; padding: 0.7rem 1.3rem; border-radius: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease; font-size: 0.9rem; }
         .btn-add:hover { transform: translateY(-2px); background: var(--primary-hover); }
-
-        /* Desktop: Button di header */
-        .btn-add-header { display: inline-flex; }
-        
-        /* Mobile: Button fixed di bawah */
-        .btn-add-fixed { 
-            display: none; 
-            position: fixed; 
-            bottom: 20px; 
-            left: 50%; 
-            transform: translateX(-50%);
-            z-index: 999;
-            box-shadow: 0 4px 20px rgba(45, 140, 255, 0.4);
-            padding: 0.65rem 1.2rem;
-            font-size: 0.8rem;
-            border-radius: 50px;
-        }
-        .btn-add-fixed:hover { transform: translateX(-50%) translateY(-2px); }
-        .btn-add-fixed i { font-size: 1rem; }
 
         .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; padding: 0 1rem; justify-items: center; }
         .empty-state { grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: var(--text-muted); border: 2px dashed var(--card-border); border-radius: 20px; max-width: 500px; margin: 0 auto; }
@@ -126,17 +107,11 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            body { padding: 0.5rem; padding-bottom: 90px; }
+            body { padding: 0.5rem; }
             header { margin-bottom: 1.5rem; }
             .logo-text { font-size: 1.3rem; }
             .company-name { font-size: 0.7rem; }
-            
-            /* Sembunyikan button di header untuk mobile */
-            .btn-add-header { display: none !important; }
-            
-            /* Tampilkan button fixed di bawah untuk mobile */
-            .btn-add-fixed { display: inline-flex !important; }
-            
+            .btn-add { font-size: 0.85rem; padding: 0.6rem 1rem; }
             .grid-container { gap: 1rem; padding: 0 0.5rem; }
             .card { max-width: 100%; }
             .card-body { padding: 1rem; }
@@ -153,8 +128,6 @@
             .countdown { font-size: 1.1rem; }
             .info-row { font-size: 0.75rem; }
             .btn-card { font-size: 0.8rem; padding: 0.6rem; }
-            .btn-add-fixed { padding: 0.55rem 1rem; font-size: 0.75rem; }
-            .btn-add-fixed i { font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -166,8 +139,7 @@
             <div class="logo-text">Zoom GMRJ</div>
             <div class="company-name">PT Management Gusmus Raksa Jasad</div>
         </div>
-        <!-- Button untuk Desktop -->
-        <button class="btn-add btn-add-header" onclick="checkPassword('add')">
+        <button class="btn-add" onclick="checkPassword('add')">
             <i class="ph ph-plus-circle"></i> Tambah Meeting
         </button>
     </header>
@@ -179,11 +151,6 @@
             <p>Menghubungkan ke Project Zoom-APS...</p>
         </div>
     </main>
-
-    <!-- Button Fixed untuk Mobile -->
-    <button class="btn-add btn-add-fixed" onclick="checkPassword('add')">
-        <i class="ph ph-plus-circle"></i> Tambah Meeting
-    </button>
 
     <!-- Modal Form -->
     <div class="modal-overlay" id="formModal">
