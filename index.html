@@ -14,6 +14,8 @@
             --primary: #2D8CFF;
             --primary-hover: #1A75EB;
             --accent: #FF4757;
+            --success: #10b981;
+            --warning: #f59e0b;
             --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             --card-bg: rgba(255, 255, 255, 0.07);
             --card-border: rgba(255, 255, 255, 0.1);
@@ -33,10 +35,8 @@
         .btn-add { background: var(--primary); color: white; border: none; padding: 0.7rem 1.3rem; border-radius: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease; font-size: 0.9rem; }
         .btn-add:hover { transform: translateY(-2px); background: var(--primary-hover); }
 
-        /* Desktop: Button di header */
         .btn-add-header { display: inline-flex; }
         
-        /* Mobile: Button fixed di bawah */
         .btn-add-fixed { 
             display: none; 
             position: fixed; 
@@ -72,13 +72,19 @@
         .info-row i { color: var(--primary); font-size: 1rem; }
 
         .card-actions { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
-        .btn-card { padding: 0.65rem; border-radius: 8px; border: none; cursor: pointer; font-size: 0.85rem; font-weight: 600; display: flex; justify-content: center; align-items: center; gap: 5px; transition: 0.2s; width: 100%; }
-        .btn-join { background: var(--primary); color: white; text-decoration: none; }
+        .btn-card { padding: 0.65rem; border-radius: 8px; border: none; cursor: pointer; font-size: 0.85rem; font-weight: 600; display: flex; justify-content: center; align-items: center; gap: 5px; transition: 0.2s; width: 100%; text-decoration: none; }
+        
+        .btn-join { background: var(--primary); color: white; }
         .btn-join:hover { background: var(--primary-hover); }
-        .btn-attend { background: #10b981; color: white; }
+        
+        .btn-pdf { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
+        .btn-pdf:hover { background: rgba(45, 140, 255, 0.1); }
+
+        .btn-attend { background: var(--success); color: white; }
         .btn-attend:hover { background: #059669; }
+        
         .btn-row { display: flex; gap: 0.5rem; }
-        .btn-edit { background: #f59e0b; color: white; flex: 1; }
+        .btn-edit { background: var(--warning); color: white; flex: 1; }
         .btn-edit:hover { background: #d97706; }
         .btn-delete { background: rgba(255, 71, 87, 0.2); color: var(--accent); flex: 1; }
         .btn-delete:hover { background: var(--accent); color: white; }
@@ -86,7 +92,7 @@
         /* Modals */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s; padding: 1rem; }
         .modal-overlay.active { opacity: 1; pointer-events: all; }
-        .modal { background: #1e293b; width: 100%; max-width: 500px; padding: 1.5rem; border-radius: 20px; border: 1px solid var(--card-border); transform: scale(0.9); transition: transform 0.3s; max-height: 90vh; overflow-y: auto; }
+        .modal { background: #1e293b; width: 100%; max-width: 500px; padding: 1.5rem; border-radius: 20px; border: 1px solid var(--card-border); transform: scale(0.9); transition: transform 0.3s; max-height: 90vh; overflow-y: auto; display: flex; flex-direction: column; }
         .modal-overlay.active .modal { transform: scale(1); }
         .form-group { margin-bottom: 1rem; }
         .form-group label { display: block; margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.85rem; }
@@ -95,9 +101,9 @@
         textarea.form-control { min-height: 80px; resize: vertical; }
         .modal-actions { display: flex; justify-content: flex-end; gap: 0.8rem; margin-top: 1.5rem; flex-wrap: wrap; }
         .btn-cancel { background: transparent; border: none; color: var(--text-muted); padding: 0.7rem 1.3rem; cursor: pointer; }
-        .btn-save { background: var(--primary); color: white; border: none; padding: 0.7rem 1.3rem; border-radius: 10px; cursor: pointer; font-weight: 600; }
+        .btn-save { background: var(--primary); color: white; border: none; padding: 0.7rem 1.3rem; border-radius: 10px; cursor: pointer; font-weight: 600; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .btn-save:hover { background: var(--primary-hover); }
-        .btn-save:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-save:disabled { opacity: 0.6; cursor: not-allowed; }
         
         .file-upload-wrapper { position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; width: 100%; }
         .file-upload-btn { border: 1px dashed var(--text-muted); color: var(--text-muted); background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 10px; text-align: center; cursor: pointer; transition: 0.2s; width: 100%; }
@@ -105,11 +111,23 @@
         #imageInput { position: absolute; left: 0; top: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
         #previewImage { max-width: 100%; width: 200px; height: 200px; object-fit: cover; border-radius: 8px; margin-top: 10px; display: none; border: 2px solid var(--card-border); }
 
-        .attendee-list { margin-top: 1rem; max-height: 200px; overflow-y: auto; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 10px; }
-        .attendee-item { display: flex; justify-content: space-between; padding: 8px 5px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
+        .attendee-list { margin-top: 1rem; max-height: 300px; overflow-y: auto; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 10px; }
+        .attendee-item { display: flex; flex-direction: column; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; gap: 4px; animation: fadeIn 0.4s ease; }
         .attendee-item:last-child { border-bottom: none; }
+        .attendee-header { display: flex; justify-content: space-between; align-items: center; }
+        .attendee-name { font-weight: 600; color: var(--text-main); font-size: 1rem; }
+        .attendee-time { font-size: 0.75rem; opacity: 0.7; color: var(--text-muted); }
+        .attendee-status { font-size: 0.75rem; display: inline-block; padding: 2px 8px; border-radius: 4px; margin-top: 2px; font-weight: 500; }
+        .status-hadir { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .status-izin { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .attendee-reason { color: var(--text-muted); font-style: italic; font-size: 0.8rem; margin-top: 2px; background: rgba(255,255,255,0.03); padding: 4px 8px; border-radius: 4px; border-left: 2px solid var(--warning); }
 
         .attendance-notice { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem; text-align: center; font-size: 0.85rem; color: #10b981; }
+
+        /* Radio Group Style */
+        .radio-group { display: flex; gap: 1rem; margin-bottom: 0.5rem; }
+        .radio-label { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; color: var(--text-main); font-size: 0.9rem; }
+        .radio-label input { accent-color: var(--primary); width: 1.1em; height: 1.1em; }
 
         .toast-container { position: fixed; bottom: 1rem; right: 1rem; z-index: 2000; display: flex; flex-direction: column; gap: 10px; max-width: calc(100% - 2rem); }
         .toast { background: #1e293b; border-left: 4px solid var(--primary); color: white; padding: 0.8rem 1.2rem; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 10px; animation: slideIn 0.3s ease forwards; min-width: 250px; font-size: 0.85rem; }
@@ -118,6 +136,7 @@
         
         @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Scrollbar Style */
         ::-webkit-scrollbar { width: 6px; }
@@ -130,13 +149,8 @@
             header { margin-bottom: 1.5rem; }
             .logo-text { font-size: 1.3rem; }
             .company-name { font-size: 0.7rem; }
-            
-            /* Sembunyikan button di header untuk mobile */
             .btn-add-header { display: none !important; }
-            
-            /* Tampilkan button fixed di bawah untuk mobile */
             .btn-add-fixed { display: inline-flex !important; }
-            
             .grid-container { gap: 1rem; padding: 0 0.5rem; }
             .card { max-width: 100%; }
             .card-body { padding: 1rem; }
@@ -147,14 +161,9 @@
 
         @media (max-width: 480px) {
             .logo-text { font-size: 1.2rem; }
-            .company-name { font-size: 0.65rem; }
             .card-title { font-size: 1rem; }
             .card-desc { font-size: 0.8rem; }
             .countdown { font-size: 1.1rem; }
-            .info-row { font-size: 0.75rem; }
-            .btn-card { font-size: 0.8rem; padding: 0.6rem; }
-            .btn-add-fixed { padding: 0.55rem 1rem; font-size: 0.75rem; }
-            .btn-add-fixed i { font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -166,7 +175,6 @@
             <div class="logo-text">Zoom GMRJ</div>
             <div class="company-name">PT Management Gusmus Raksa Jasad</div>
         </div>
-        <!-- Button untuk Desktop -->
         <button class="btn-add btn-add-header" onclick="checkPassword('add')">
             <i class="ph ph-plus-circle"></i> Tambah Meeting
         </button>
@@ -219,6 +227,11 @@
                     <label>🔗 Link Zoom</label>
                     <input type="url" id="link" class="form-control" placeholder="https://zoom.us/j/..." required>
                 </div>
+                <div class="form-group">
+                    <label>📄 Link PDF / Materi (Google Drive) (Opsional)</label>
+                    <input type="url" id="pdfLink" class="form-control" placeholder="https://drive.google.com/...">
+                    <small style="color: var(--text-muted); font-size: 0.75rem;">Link untuk tombol download PDF</small>
+                </div>
                 <div class="modal-actions">
                     <button type="button" class="btn-cancel" onclick="closeModal('formModal')">Batal</button>
                     <button type="submit" class="btn-save" id="submitBtn"><i class="ph ph-cloud-arrow-up"></i> Simpan ke Cloud</button>
@@ -250,7 +263,7 @@
             <h2>✅ Absensi Meeting</h2>
             <h3 id="attMeetingTitle" style="color: var(--primary); margin-bottom: 0.5rem; font-size: 1rem;"></h3>
             
-            <div class="attendance-notice"><i class="ph ph-info"></i> Silakan absen terlebih dahulu sebelum masuk Zoom</div>
+            <div class="attendance-notice"><i class="ph ph-info"></i> Isi nama dan status kehadiran Anda</div>
 
             <div class="info-row" style="font-size: 0.95rem; margin-bottom: 1rem;">
                 <i class="ph ph-users"></i> <strong>Total Peserta: <span id="attCount">0</span></strong>
@@ -258,9 +271,31 @@
             
             <form id="attendanceForm" style="margin-bottom: 1rem;">
                 <div class="form-group">
-                    <input type="text" id="attendeeName" class="form-control" placeholder="Nama Lengkap..." required>
+                    <label>Nama Lengkap</label>
+                    <input type="text" id="attendeeName" class="form-control" placeholder="Nama Anda..." required autocomplete="off">
                 </div>
-                <button type="submit" class="btn-save" style="width: 100%;"><i class="ph ph-check-square"></i> Hadir</button>
+                
+                <div class="form-group">
+                    <label>Status Kehadiran</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="attStatus" value="Hadir" checked onchange="toggleReasonField()"> Hadir
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="attStatus" value="Izin" onchange="toggleReasonField()"> Izin
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Keterangan Field: Hidden by default, shown when Izin is selected -->
+                <div class="form-group" id="reasonGroup" style="display: none; animation: fadeIn 0.3s ease;">
+                    <label>Keterangan (Alasan Izin)</label>
+                    <input type="text" id="attendeeReason" class="form-control" placeholder="Contoh: Sakit, Ada acara keluarga...">
+                </div>
+
+                <button type="submit" class="btn-save" style="width: 100%; margin-top: 10px;" id="btnSubmitAttendance">
+                    <i class="ph ph-paper-plane-right"></i> Kirim Absensi
+                </button>
             </form>
 
             <div class="attendee-list" id="attendeeList"></div>
@@ -304,6 +339,24 @@
         const imageInput = document.getElementById('imageInput');
         const formTitle = document.getElementById('formTitle');
         const editMeetingId = document.getElementById('editMeetingId');
+        const attendeeListContainer = document.getElementById('attendeeList');
+
+        // Expose function to window for HTML onclick events
+        window.toggleReasonField = function() {
+            const status = document.querySelector('input[name="attStatus"]:checked').value;
+            const reasonGroup = document.getElementById('reasonGroup');
+            const reasonInput = document.getElementById('attendeeReason');
+            
+            if (status === 'Izin') {
+                reasonGroup.style.display = 'block';
+                reasonInput.setAttribute('required', 'required');
+                reasonInput.focus();
+            } else {
+                reasonGroup.style.display = 'none';
+                reasonInput.removeAttribute('required');
+                reasonInput.value = '';
+            }
+        };
 
         document.getElementById('meetingForm').addEventListener('submit', handleSubmitMeeting);
         document.getElementById('passwordForm').addEventListener('submit', (e) => { e.preventDefault(); handlePasswordCheck(e); });
@@ -333,6 +386,16 @@
             onSnapshot(q, (snapshot) => {
                 meetings = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 renderMeetings();
+                
+                // Realtime update untuk modal jika sedang terbuka
+                if (activeMeetingId) {
+                    const activeMeeting = meetings.find(m => m.id === activeMeetingId);
+                    if (activeMeeting) {
+                        document.getElementById('attMeetingTitle').textContent = activeMeeting.title;
+                        renderAttendeeList(activeMeeting.attendees || []);
+                    }
+                }
+
                 if (meetings.length === 0) {
                     grid.innerHTML = `<div class="empty-state"><i class="ph ph-calendar-x" style="font-size: 3rem;"></i><h3>Belum ada jadwal GMRJ</h3><p>✅ Terhubung ke Database Zoom-APS</p></div>`;
                 }
@@ -385,27 +448,42 @@
 
         async function handleSubmitMeeting(e) {
             e.preventDefault();
-            const title = document.getElementById('title').value, desc = document.getElementById('desc').value, datetime = document.getElementById('datetime').value, location = document.getElementById('location').value, link = document.getElementById('link').value, meetingId = editMeetingId.value;
+            const title = document.getElementById('title').value;
+            const desc = document.getElementById('desc').value;
+            const datetime = document.getElementById('datetime').value;
+            const location = document.getElementById('location').value;
+            const link = document.getElementById('link').value;
+            const pdfLink = document.getElementById('pdfLink').value;
+            const meetingId = editMeetingId.value;
 
-            submitBtn.disabled = true; submitBtn.innerHTML = '<i class="ph ph-spinner"></i> Menyimpan...';
+            submitBtn.disabled = true; 
+            submitBtn.innerHTML = '<i class="ph ph-spinner"></i> Menyimpan...';
 
             try {
                 if (isEditMode && meetingId) {
                     const meetingRef = doc(db, "meetings", meetingId);
-                    const updateData = { title, desc, datetime, location, link };
+                    const updateData = { title, desc, datetime, location, link, pdfLink };
                     if (currentImageBase64) updateData.image = currentImageBase64;
                     await updateDoc(meetingRef, updateData);
                     showToast("✅ Meeting berhasil diupdate!", "success");
                 } else {
                     const imageUrl = currentImageBase64 || "https://picsum.photos/seed/zoom/400/200";
-                    await addDoc(meetingsCol, { title, desc, datetime, location, link, image: imageUrl, attendees: [], createdAt: new Date().toISOString() });
+                    await addDoc(meetingsCol, { 
+                        title, desc, datetime, location, link, pdfLink, 
+                        image: imageUrl, 
+                        attendees: [], 
+                        createdAt: new Date().toISOString() 
+                    });
                     showToast("✅ Meeting tersimpan ke Cloud!", "success");
                 }
-                closeModal('formModal'); resetForm();
+                closeModal('formModal'); 
+                resetForm();
             } catch (error) {
-                console.error(error); showToast("❌ Error: " + error.message, "error");
+                console.error(error); 
+                showToast("❌ Error: " + error.message, "error");
             } finally {
-                submitBtn.disabled = false; submitBtn.innerHTML = '<i class="ph ph-cloud-arrow-up"></i> Simpan ke Cloud';
+                submitBtn.disabled = false; 
+                submitBtn.innerHTML = '<i class="ph ph-cloud-arrow-up"></i> Simpan ke Cloud';
             }
         }
 
@@ -415,39 +493,101 @@
                 const meetingSnap = await getDoc(meetingRef);
                 if (meetingSnap.exists()) {
                     const data = meetingSnap.data();
-                    isEditMode = true; editMeetingId.value = id; formTitle.textContent = "✏️ Edit Meeting GMRJ";
+                    isEditMode = true; 
+                    editMeetingId.value = id; 
+                    formTitle.textContent = "✏️ Edit Meeting GMRJ";
                     document.getElementById('title').value = data.title;
                     document.getElementById('desc').value = data.desc;
                     document.getElementById('datetime').value = data.datetime;
                     document.getElementById('location').value = data.location;
                     document.getElementById('link').value = data.link;
-                    if (data.image && data.image.startsWith('data:')) { previewImg.src = data.image; previewImg.style.display = 'block'; currentImageBase64 = data.image; }
+                    document.getElementById('pdfLink').value = data.pdfLink || "";
+                    
+                    if (data.image && data.image.startsWith('data:')) { 
+                        previewImg.src = data.image; 
+                        previewImg.style.display = 'block'; 
+                        currentImageBase64 = data.image; 
+                    }
                     openModal('formModal');
                 }
-            } catch (error) { showToast("❌ Gagal memuat data meeting", "error"); }
+            } catch (error) { 
+                showToast("❌ Gagal memuat data meeting", "error"); 
+            }
         };
 
         window.performDelete = async (id) => {
             if(confirm('⚠️ Hapus meeting ini dari server?')) {
-                try { await deleteDoc(doc(db, "meetings", id)); showToast("🗑️ Meeting dihapus", "info"); }
-                catch (error) { showToast("❌ Gagal menghapus", "error"); }
+                try { 
+                    await deleteDoc(doc(db, "meetings", id)); 
+                    showToast("🗑️ Meeting dihapus", "info"); 
+                }
+                catch (error) { 
+                    showToast("❌ Gagal menghapus", "error"); 
+                }
             }
         };
 
         async function handleAddAttendee(e) {
             e.preventDefault();
-            const name = document.getElementById('attendeeName').value.trim();
-            if (!name) { showToast("❌ Nama tidak boleh kosong", "error"); return; }
+            const btn = document.getElementById('btnSubmitAttendance');
+            const originalBtnContent = btn.innerHTML;
+            const nameInput = document.getElementById('attendeeName');
+            const status = document.querySelector('input[name="attStatus"]:checked').value;
+            const reason = document.getElementById('attendeeReason').value.trim();
+
+            if (!nameInput.value.trim()) { 
+                showToast("❌ Nama tidak boleh kosong", "error"); 
+                return; 
+            }
+
+            // Validasi jika izin tapi tidak ada keterangan
+            if (status === 'Izin' && !reason) {
+                showToast("❌ Mohon isi keterangan izin", "error");
+                return;
+            }
+
+            // Ubah tombol jadi loading
+            btn.disabled = true;
+            btn.innerHTML = '<i class="ph ph-spinner ph-spin"></i> Memproses...';
 
             try {
                 const meetingRef = doc(db, "meetings", activeMeetingId);
-                await updateDoc(meetingRef, { attendees: arrayUnion({ name, time: new Date().toLocaleTimeString('id-ID', {hour: '2-digit', minute:'2-digit'}), timestamp: new Date().toISOString() }) });
-                document.getElementById('attendeeName').value = '';
-                showToast(`✅ ${name} tercatat hadir`, "success");
-            } catch (error) { console.error(error); showToast("❌ Gagal absen", "error"); }
+                const attendeeData = { 
+                    name: nameInput.value.trim(), 
+                    status,
+                    reason: status === 'Izin' ? reason : '', 
+                    time: new Date().toLocaleTimeString('id-ID', {hour: '2-digit', minute:'2-digit'}), 
+                    timestamp: new Date().toISOString() 
+                };
+                
+                await updateDoc(meetingRef, { attendees: arrayUnion(attendeeData) });
+                
+                // Feedback Sukses
+                showToast(`✅ ${attendeeData.name} berhasil dicatat!`, "success");
+                
+                // Reset Form
+                nameInput.value = '';
+                document.getElementById('attendeeReason').value = '';
+                document.querySelector('input[name="attStatus"][value="Hadir"]').checked = true;
+                toggleReasonField();
+                nameInput.focus(); // Kembali fokus ke input nama untuk peserta berikutnya
+
+            } catch (error) { 
+                console.error(error); 
+                showToast("❌ Gagal absen: " + error.message, "error"); 
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalBtnContent;
+            }
         }
 
-        window.checkPassword = (action, id = null) => { pendingAction = action; pendingDeleteId = id; pendingEditId = id; document.getElementById('securityPass').value = ''; openModal('passwordModal'); };
+        window.checkPassword = (action, id = null) => { 
+            pendingAction = action; 
+            pendingDeleteId = id; 
+            pendingEditId = id; 
+            document.getElementById('securityPass').value = ''; 
+            openModal('passwordModal'); 
+        };
 
         window.handlePasswordCheck = (e) => {
             e.preventDefault();
@@ -457,7 +597,9 @@
                 if (pendingAction === 'add') { resetForm(); openModal('formModal'); }
                 else if (pendingAction === 'edit') openEditMeeting(pendingEditId);
                 else if (pendingAction === 'delete') performDelete(pendingDeleteId);
-            } else { showToast("❌ Password Salah!", "error"); }
+            } else { 
+                showToast("❌ Password Salah!", "error"); 
+            }
         };
 
         window.openAttendance = (id) => {
@@ -467,6 +609,8 @@
                 document.getElementById('attMeetingTitle').textContent = meeting.title;
                 renderAttendeeList(meeting.attendees || []);
                 openModal('attendanceModal');
+                // Auto fokus ke input nama saat modal dibuka
+                setTimeout(() => document.getElementById('attendeeName').focus(), 300);
             }
         };
 
@@ -485,6 +629,13 @@
             meetings.forEach(m => {
                 const { dateStr, timeStr } = formatDateTime(m.datetime);
                 const attendeeCount = m.attendees ? m.attendees.length : 0;
+                
+                const pdfBtnHtml = m.pdfLink 
+                    ? `<a href="${m.pdfLink}" target="_blank" class="btn-card btn-pdf">
+                        <i class="ph ph-file-pdf"></i> Download PDF / Materi
+                       </a>` 
+                    : '';
+
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
@@ -499,9 +650,11 @@
                         <div class="info-row"><i class="ph ph-calendar-blank"></i> ${dateStr}</div>
                         <div class="info-row"><i class="ph ph-clock"></i> ${timeStr}</div>
                         <div class="info-row"><i class="ph ph-map-pin"></i> ${escapeHtml(m.location)}</div>
+                        
                         <div class="card-actions">
+                            ${pdfBtnHtml}
                             <button onclick="openAttendance('${m.id}')" class="btn-card btn-attend">
-                                <i class="ph ph-check-square"></i> Absen Terlebih Dahulu (${attendeeCount})
+                                <i class="ph ph-check-square"></i> Absensi (${attendeeCount})
                             </button>
                             <a href="${m.link}" target="_blank" class="btn-card btn-join">
                                 <i class="ph ph-video-camera"></i> Masuk Zoom Sekarang
@@ -522,16 +675,33 @@
         }
 
         function renderAttendeeList(list) {
-            const container = document.getElementById('attendeeList');
+            const container = attendeeListContainer;
             document.getElementById('attCount').textContent = list.length;
             if (list.length === 0) {
                 container.innerHTML = '<div style="text-align:center; padding: 2rem; font-size:0.85rem; color:var(--text-muted);"><i class="ph ph-users" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></i>Belum ada yang absen</div>';
                 return;
             }
             container.innerHTML = '';
-            list.forEach((att, idx) => {
-                container.innerHTML += `<div class="attendee-item"><span><strong>${idx+1}.</strong> ${escapeHtml(att.name)}</span><span style="font-size:0.75rem; opacity:0.7">⏰ ${att.time}</span></div>`;
+            const sortedList = [...list].reverse();
+            
+            sortedList.forEach((att) => {
+                const statusClass = att.status === 'Hadir' ? 'status-hadir' : 'status-izin';
+                const statusIcon = att.status === 'Hadir' ? '<i class="ph ph-check"></i>' : '<i class="ph ph-warning"></i>';
+                const reasonHtml = att.reason ? `<div class="attendee-reason">"${escapeHtml(att.reason)}"</div>` : '';
+                
+                container.innerHTML += `
+                    <div class="attendee-item">
+                        <div class="attendee-header">
+                            <span class="attendee-name">${escapeHtml(att.name)}</span>
+                            <span class="attendee-time">${att.time}</span>
+                        </div>
+                        <div class="attendee-status ${statusClass}">${statusIcon} ${att.status}</div>
+                        ${reasonHtml}
+                    </div>`;
             });
+
+            // Scroll otomatis ke bawah agar nama baru terlihat
+            container.scrollTop = container.scrollHeight;
         }
 
         function updateTimers() {
@@ -549,10 +719,19 @@
         }
 
         window.openModal = (id) => document.getElementById(id).classList.add('active');
-        window.closeModal = (id) => document.getElementById(id).classList.remove('active');
+        window.closeModal = (id) => {
+            document.getElementById(id).classList.remove('active');
+            if(id === 'attendanceModal') activeMeetingId = null;
+        }
         window.resetForm = () => { 
-            document.getElementById('meetingForm').reset(); 
-            previewImg.style.display = 'none'; currentImageBase64 = null; imageInput.value = ''; editMeetingId.value = ''; isEditMode = false; formTitle.textContent = '📅 Jadwal Baru GMRJ'; 
+            const form = document.getElementById('meetingForm');
+            form.reset(); 
+            previewImg.style.display = 'none'; 
+            currentImageBase64 = null; 
+            imageInput.value = ''; 
+            editMeetingId.value = ''; 
+            isEditMode = false; 
+            formTitle.textContent = '📅 Jadwal Baru GMRJ'; 
         };
         function showToast(msg, type='info') {
             const t = document.createElement('div'); t.className = `toast ${type}`;
